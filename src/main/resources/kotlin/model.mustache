@@ -1,0 +1,13 @@
+package {{package}}
+
+{{#imports}}import {{import}}
+{{/imports}}
+
+import com.google.gson.annotations.SerializedName
+{{#models}}
+
+{{#model}}{{#description}}
+/**
+ * {{.}}
+ **/{{/description}}
+{{#isEnum}}{{>modelEnum}}{{/isEnum}}{{^isEnum}}{{>modelClass}}{{/isEnum}}{{/model}}{{/models}}

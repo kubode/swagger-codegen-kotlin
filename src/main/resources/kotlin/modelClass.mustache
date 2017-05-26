@@ -1,0 +1,7 @@
+{{^hasVars}}class {{classname}}{{/hasVars}}{{#hasVars}}data class {{classname}}({{#vars}}
+        /**{{#description}}
+         * {{{.}}}{{/description}}{{#minimum}}
+         * minimum: {{.}}{{/minimum}}{{#maximum}}
+         * maximum: {{.}}{{/maximum}}
+         **/
+        @SerializedName("{{baseName}}") val {{name}}: {{>datatypeWithEnum}}{{#hasMore}},{{/hasMore}}{{^hasMore}}){{/hasMore}}{{/vars}}{{/hasVars}}

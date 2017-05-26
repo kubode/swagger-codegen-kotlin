@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-gradle-codegen.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-gradle-codegen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-gradle-codegen_main.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-gradle-codegen_main.iml" group="kotlin-gradle-codegen" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-gradle-codegen_test.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-gradle-codegen_test.iml" group="kotlin-gradle-codegen" />
+    </modules>
+  </component>
+</project>

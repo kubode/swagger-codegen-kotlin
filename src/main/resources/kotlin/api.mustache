@@ -1,0 +1,41 @@
+package {{package}}
+
+import retrofit2.Call
+import retrofit2.http.*
+
+import io.reactivex.*
+
+{{#imports}}import {{import}}
+{{/imports}}
+
+{{#operations}}
+interface {{classname}} {
+    {{#operation}}
+    /**
+     * {{summary}}
+     * {{notes}}
+{{#allParams}}
+     * @param {{paramName}}{{#description}} {{description}}{{/description}}{{^required}}{{#defaultValue}} default to {{.}}{{/defaultValue}}{{/required}}
+{{/allParams}}
+     * @return {{>returnRx2Type}}{{#returnType}}&lt;{{.}}&gt;{{/returnType}}
+     */
+    {{#formParams}}
+    {{#-first}}
+    {{#isMultipart}}@Multipart{{/isMultipart}}{{^isMultipart}}@FormUrlEncoded{{/isMultipart}}
+    {{/-first}}
+    {{/formParams}}
+    {{^formParams}}
+    {{#prioritizedContentTypes}}
+    {{#-first}}
+    @Headers(arrayOf("Content-Type:{{mediaType}}"))
+    {{/-first}}
+    {{/prioritizedContentTypes}}
+    {{/formParams}}
+    @{{httpMethod}}("{{{path}}}")
+    fun {{operationId}}({{^allParams}}){{/allParams}}{{#allParams}}
+            {{>params}}{{#hasMore}},{{/hasMore}}{{^hasMore}}){{/hasMore}}{{/allParams}}
+            : {{>returnRx2Type}}{{#returnType}}<{{.}}>{{/returnType}}
+
+    {{/operation}}
+}
+{{/operations}}
