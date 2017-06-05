@@ -1,0 +1,6 @@
+{
+  "invokerPackage": "jp.loppick.data",
+  "modelPackage": "jp.loppick.data.network.model",
+  "apiPackage": "jp.loppick.data.network.apiclient",
+  "hideGenerationTimestamp": true
+}
