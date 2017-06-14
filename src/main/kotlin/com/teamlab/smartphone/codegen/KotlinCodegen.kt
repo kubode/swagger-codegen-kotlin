@@ -1,9 +1,6 @@
 package com.teamlab.smartphone.codegen
 
-import io.swagger.codegen.CodegenConfig
-import io.swagger.codegen.CodegenType
-import io.swagger.codegen.DefaultCodegen
-import io.swagger.codegen.SwaggerCodegen
+import io.swagger.codegen.*
 
 class KotlinCodegen : DefaultCodegen(), CodegenConfig {
     override fun getTag() = CodegenType.CLIENT
@@ -79,6 +76,17 @@ class KotlinCodegen : DefaultCodegen(), CodegenConfig {
         (importMapping as MutableMap) += mapOf(
                 "Date" to "java.util.Date",
                 "UUID" to "java.util.UUID")
+    }
+
+    override fun postProcessOperations(objs: MutableMap<String, Any>): MutableMap<String, Any> {
+        super.postProcessOperations(objs)
+        @Suppress("UNCHECKED_CAST")
+        (objs["operations"] as? Map<String, Any>)?.let {
+            (it["operation"] as? List<CodegenOperation>)?.forEach {
+                it.path = it.path.removePrefix("/")
+            }
+        }
+        return objs
     }
 }
 
