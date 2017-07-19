@@ -18,7 +18,7 @@ plugins {
 }
 
 application {
-    mainClassName = "io.swagger.codegen.Codegen"
+    mainClassName = "io.swagger.codegen.SwaggerCodegen"
 }
 
 repositories {
