@@ -1,10 +1,8 @@
 package com.teamlab.smartphone.codegen
 
-import io.swagger.codegen.CodegenConfig
-import io.swagger.codegen.CodegenOperation
-import io.swagger.codegen.CodegenType
-import io.swagger.codegen.SwaggerCodegen
+import io.swagger.codegen.*
 import io.swagger.codegen.languages.JavaClientCodegen
+import io.swagger.models.Model
 
 class KotlinCodegen : JavaClientCodegen(), CodegenConfig {
     override fun getTag() = CodegenType.CLIENT
@@ -88,6 +86,13 @@ class KotlinCodegen : JavaClientCodegen(), CodegenConfig {
     override fun processOpts() {
         super.processOpts()
         supportingFiles.clear()
+    }
+
+    override fun fromModel(name: String, model: Model, allDefinitions: MutableMap<String, Model>): CodegenModel {
+        return super.fromModel(name, model, allDefinitions).apply {
+            imports.remove("ApiModelProperty")
+            imports.remove("ApiModel")
+        }
     }
 
     override fun postProcessOperations(objs: MutableMap<String, Any>): MutableMap<String, Any> {
