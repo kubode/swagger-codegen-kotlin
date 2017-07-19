@@ -1,8 +1,12 @@
 package com.teamlab.smartphone.codegen
 
-import io.swagger.codegen.*
+import io.swagger.codegen.CodegenConfig
+import io.swagger.codegen.CodegenOperation
+import io.swagger.codegen.CodegenType
+import io.swagger.codegen.SwaggerCodegen
+import io.swagger.codegen.languages.JavaClientCodegen
 
-class KotlinCodegen : DefaultCodegen(), CodegenConfig {
+class KotlinCodegen : JavaClientCodegen(), CodegenConfig {
     override fun getTag() = CodegenType.CLIENT
     override fun getName() = "kotlin"
     override fun getHelp() = "Generate a Kotlin client."
@@ -14,6 +18,9 @@ class KotlinCodegen : DefaultCodegen(), CodegenConfig {
         embeddedTemplateDir = "kotlin"
         modelTemplateFiles["model.mustache"] = ".kt"
         apiTemplateFiles["api.mustache"] = ".kt"
+        apiTestTemplateFiles.clear()
+        modelDocTemplateFiles.clear()
+        apiDocTemplateFiles.clear()
         // https://github.com/JetBrains/kotlin/blob/master/core/descriptors/src/org/jetbrains/kotlin/renderer/KeywordStringsGenerated.java
         (reservedWords as MutableSet) += setOf(
                 "package",
@@ -76,6 +83,11 @@ class KotlinCodegen : DefaultCodegen(), CodegenConfig {
         (importMapping as MutableMap) += mapOf(
                 "Date" to "java.util.Date",
                 "UUID" to "java.util.UUID")
+    }
+
+    override fun processOpts() {
+        super.processOpts()
+        supportingFiles.clear()
     }
 
     override fun postProcessOperations(objs: MutableMap<String, Any>): MutableMap<String, Any> {
