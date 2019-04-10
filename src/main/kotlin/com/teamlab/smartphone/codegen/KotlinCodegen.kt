@@ -8,7 +8,12 @@ class KotlinCodegen : JavaClientCodegen(), CodegenConfig {
     override fun getTag() = CodegenType.CLIENT
     override fun getName() = "kotlin"
     override fun getHelp() = "Generate a Kotlin client."
-    override fun toApiName(name: String?) = "Api"
+    override fun toApiName(name: String?): String {
+        val apiName = name?.let {
+            if (Regex("default").matches(it.toLowerCase())) "" else it
+        } ?: "OnName"
+        return "${apiName}Api"
+    }
 
     init {
         supportsInheritance = false
